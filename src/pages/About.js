@@ -11,7 +11,7 @@ const About = (props) => {
           Bookcase ({props.bookLength})
         </Link>
       </div>
-      <div className="page">Welcome to the my Bookcase Application. This is a Book catalogue that will find your desired book, list tthe price and tell you some information</div>
+      <div className="page"> Bookcase Application</div>
     </div>
   );
 };

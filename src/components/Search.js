@@ -8,9 +8,9 @@ const Search = (props) => {
   };
   return (
     <div>
-      <form onSubmit={(e) => handleSubmit(e)} >
+      <form onSubmit={(e) => handleSubmit(e)}>
         <label>
-          Search for a book in my catalogue:
+          Search:
           <input
             type="text"
             value={keyword}
