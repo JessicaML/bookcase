@@ -13,9 +13,7 @@ const App = () => {
   const [bookcase, setBookcase] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=jessica&AIzaSyAp6q_sqRyvk236YTfeiMQyf2bCUf_vA_E`
-    )
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=jessica`)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
