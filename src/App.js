@@ -5,11 +5,23 @@ import Header from "./components/Header";
 import BookList from "./components/BookList";
 import Search from "./components/Search";
 import About from "./pages/About";
-import data from "./models/local-books.json";
+// import data from "./models/local-books.json";
 
 const App = () => {
-  const [books, setBooks] = useState(data);
+  // const [books, setBooks] = useState(data);
+  const [books, setBooks] = useState(null);
   const [bookcase, setBookcase] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=jessica&AIzaSyAp6q_sqRyvk236YTfeiMQyf2bCUf_vA_E`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setBooks(result.items);
+      });
+  }, []);
 
   const findBooks = async (value) => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${value}&filter=paid-ebooks&print-type=books&projection=lite`;
@@ -18,7 +30,6 @@ const App = () => {
     if (!results.error) {
       setBooks(results.items);
       console.log(results.items);
-      
     }
   };
 
@@ -30,7 +41,7 @@ const App = () => {
           book.read = true;
         }
         return book;
-      }),
+      })
     ]);
   };
 
@@ -42,22 +53,16 @@ const App = () => {
           book.read = false;
         }
         return book;
-      }),
+      })
     ]);
   };
 
-  useEffect(() => {
-    document.title = `My Library ${bookcase.length} Read`;
-    Array.from(document.getElementsByClassName("bookLink")).forEach((el) => {
-      el.innerText = ` Bookcase (${bookcase.length})`;
-    });
-   
-  },[]);
   return (
     <Router>
       <div className="container">
         <Route
-          exact path="/"
+          exact
+          path="/"
           render={() => (
             <Fragment>
               <Header bookLength={bookcase.length} />

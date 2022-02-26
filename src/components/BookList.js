@@ -7,12 +7,12 @@ const BookList = ({ books, ...props }) => {
     <div className="list">
       <div>
         {props.stored === "library" && <h2>Suggested Reading</h2>}
-        {books.length === 0 ? (
-          <div className="empty">No books...</div>
-        ) : (
+        {books && books.length > 0 ? (
           books
             .filter((book) => props.stored === "bookcase" || !book.read)
             .map((book) => <Book key={book.id} book={book} {...props} />)
+        ) : (
+          <div className="empty">No books...</div>
         )}
       </div>
     </div>
@@ -20,7 +20,7 @@ const BookList = ({ books, ...props }) => {
 };
 
 BookList.propTypes = {
-  books: PropTypes.array.isRequired,
+  books: PropTypes.array.isRequired
 };
 
 export default BookList;
